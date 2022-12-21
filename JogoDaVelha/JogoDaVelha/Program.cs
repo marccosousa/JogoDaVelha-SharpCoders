@@ -9,7 +9,7 @@
 
         static void Main(string[] args)
         {
-            for (int L = 0; L < 3; L++) // Colocando posições de 0 a 8 no jogo; 
+            for (int L = 0; L < 3; L++) // Colocando posições de 1 a 9 no jogo; 
             {
                 for (int C = 0; C < 3; C++)
                 {
@@ -35,8 +35,7 @@
                 Console.Clear();
                 MostrarVelha();
 
-                test++; 
-            } while (test != 5); 
+            } while (FimDeJogo() != true); 
 
         }
 
@@ -84,6 +83,41 @@
                 simbolo = "X";
             }
 
+        }
+
+        static bool FimDeJogo()
+        {
+            bool terminou = false;
+            // Se o jogo terminar em alguma linha: 
+            for (int L = 0; L < 3; L++)
+            {
+                if (mat[L, 0] == mat[L, 1] && mat[L, 1] == mat[L, 2])
+                {
+                    terminou = true;
+                }
+            }
+            // Se o jogo terminar em alguma coluna: 
+            for (int C = 0; C < 3; C++)
+            {
+                if (mat[0, C] == mat[1, C] && mat[1, C] == mat[2, C])
+                {
+                    terminou = true;
+                }
+            }
+
+            // Se o jogo terminar em alguma diagonal: Diagonal principal, diagonal secundária
+            if (mat[1, 1] == mat[2, 2] && mat[2, 2] == mat[3, 3])
+            {
+                terminou = true;
+            }
+
+            if (mat[1, 3] == mat[2, 2] && mat[2, 2] == mat[3,1])
+            {
+                terminou = true;
+            }
+
+
+            return terminou;
         }
     }
 }
