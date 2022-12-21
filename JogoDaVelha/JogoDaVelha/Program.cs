@@ -106,12 +106,12 @@
             }
 
             // Se o jogo terminar em alguma diagonal: Diagonal principal, diagonal secundária
-            if (mat[1, 1] == mat[2, 2] && mat[2, 2] == mat[3, 3])
+            if (mat[0, 0] == mat[1, 1] && mat[1, 1] == mat[2, 2])
             {
                 terminou = true;
             }
 
-            if (mat[1, 3] == mat[2, 2] && mat[2, 2] == mat[3,1])
+            if (mat[0, 2] == mat[1, 1] && mat[1, 1] == mat[2,0])
             {
                 terminou = true;
             }
