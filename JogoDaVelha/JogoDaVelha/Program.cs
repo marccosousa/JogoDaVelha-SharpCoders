@@ -3,8 +3,9 @@
     class Program
     {
         static string[,] mat = new string[3, 3];
-        static int cont = 1;
-        static string simbolo = "X", posicao; 
+        static int cont = 1, test = 1;
+        static string simbolo = "X", posicao;
+        static bool resultadoDoMomento; 
 
         static void Main(string[] args)
         {
@@ -17,11 +18,29 @@
                 }
             }
             MostrarVelha();
-            Console.Write($"Vai jogar {simbolo} em qual posição? ");
-            posicao = Console.ReadLine();
-            Jogar(simbolo, posicao);
-            MostrarVelha();
+            do
+            {
+                do
+                {
+                    Console.Write($"Vai jogar {simbolo} em qual posição? ");
+                    posicao = Console.ReadLine();
+                    resultadoDoMomento = Jogar(simbolo, posicao);
+
+                    if (resultadoDoMomento == false)
+                    {
+                        Console.WriteLine("Joga inválida, digite novamente: ");
+                    }
+                } while (resultadoDoMomento != true);
+                MudarJogador();
+                Console.Clear();
+                MostrarVelha();
+
+                test++; 
+            } while (test != 5); 
+
         }
+
+        // Funções do jogo.
         static void MostrarVelha()
         {
             Console.WriteLine("+---+---+---+");
@@ -38,7 +57,7 @@
         }
         static bool Jogar(string simbolo, string posicao)
         {
-            bool proximo = false;
+            bool mudouDeNumParaSimbolo = false;
             for (int L = 0; L < 3; L++)
             {
                 for (int C = 0; C < 3; C++)
@@ -46,11 +65,23 @@
                     if (mat[L, C] == posicao)
                     {
                         mat[L, C] = simbolo;
-                        proximo = true; 
+                        mudouDeNumParaSimbolo = true; 
                     }
                 }
             }
-            return proximo;
+            return mudouDeNumParaSimbolo;
+        }
+        static void MudarJogador()
+        {
+            if (simbolo == "X")
+            {
+                simbolo = "O";
+            }
+            else
+            {
+                simbolo = "X";
+            }
+
         }
     }
 }
