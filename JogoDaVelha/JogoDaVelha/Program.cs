@@ -5,7 +5,7 @@
         static string[,] mat = new string[3, 3];
         static int cont = 1, test = 1;
         static string simbolo = "X", posicao;
-        static bool resultadoDoMomento; 
+        static bool respostaJogar; 
 
         static void Main(string[] args)
         {
@@ -24,13 +24,13 @@
                 {
                     Console.Write($"Vai jogar {simbolo} em qual posição? ");
                     posicao = Console.ReadLine();
-                    resultadoDoMomento = Jogar(simbolo, posicao);
+                    respostaJogar = Jogar(simbolo, posicao);
 
-                    if (resultadoDoMomento == false)
+                    if (respostaJogar == false)
                     {
                         Console.WriteLine("Joga inválida, digite novamente: ");
                     }
-                } while (resultadoDoMomento != true);
+                } while (respostaJogar != true);
                 MudarJogador();
                 Console.Clear();
                 MostrarVelha();
@@ -55,6 +55,7 @@
                 Console.WriteLine("+---+---+---+");
             }
         }
+        
         static bool Jogar(string simbolo, string posicao)
         {
             bool mudouDeNumParaSimbolo = false;
@@ -71,6 +72,7 @@
             }
             return mudouDeNumParaSimbolo;
         }
+        
         static void MudarJogador()
         {
             if (simbolo == "X")
