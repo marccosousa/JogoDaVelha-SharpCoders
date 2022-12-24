@@ -146,7 +146,7 @@ namespace JogoDaVelha
                 terminou = true; 
             }
 
-            return terminou;
+            return terminou; 
         }
     }
 }
