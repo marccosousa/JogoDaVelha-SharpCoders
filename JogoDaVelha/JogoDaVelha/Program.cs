@@ -1,42 +1,52 @@
-﻿namespace JogoDaVelha
+﻿using System.Xml;
+
+namespace JogoDaVelha
 {
     class Program
     {
         static string[,] mat = new string[3, 3];
-        static int cont = 1, test = 1;
         static string simbolo = "X", posicao;
-        static bool respostaJogar; 
 
         static void Main(string[] args)
         {
-            for (int L = 0; L < 3; L++) // Colocando posições de 1 a 9 no jogo; 
-            {
-                for (int C = 0; C < 3; C++)
-                {
-                    mat[L, C] = cont.ToString();
-                    cont++; 
-                }
-            }
-            MostrarVelha();
+             int continuar = 1;
+             bool respostaJogar;
             do
             {
+                int cont = 1;
+                for (int L = 0; L < 3; L++) // Colocando posições de 1 a 9 no jogo; 
+                {
+                    for (int C = 0; C < 3; C++)
+                    {
+                        mat[L, C] = cont.ToString();
+                        cont++;
+                    }
+                }
+                MostrarVelha();
                 do
                 {
-                    Console.Write($"Vai jogar {simbolo} em qual posição? ");
-                    posicao = Console.ReadLine();
-                    respostaJogar = Jogar(simbolo, posicao);
-
-                    if (respostaJogar == false)
+                    do
                     {
-                        Console.WriteLine("Joga inválida, digite novamente: ");
-                    }
-                } while (respostaJogar != true);
-                MudarJogador();
+                        Console.Write($"Vai jogar {simbolo} em qual posição? ");
+                        posicao = Console.ReadLine();
+                        respostaJogar = Jogar(simbolo, posicao);
+
+                        if (respostaJogar == false)
+                        {
+                            Console.WriteLine("Joga inválida, digite novamente: ");
+                        }
+                    } while (respostaJogar != true);
+                    MudarJogador();
+                    Console.Clear();
+                    MostrarVelha();
+
+                } while (FimDeJogo() != true);
+                Console.Write("Novo jogo?\n[1] - Sim \n[2] - Não: ");
+                continuar = int.Parse(Console.ReadLine());
                 Console.Clear();
-                MostrarVelha();
-
-            } while (FimDeJogo() != true); 
-
+            } while (continuar == 1);
+            Console.WriteLine("Fim de jogo!");
+            
         }
 
         // Funções do jogo.
