@@ -41,8 +41,11 @@ namespace JogoDaVelha
                     MostrarVelha();
 
                 } while (FimDeJogo() != true);
-                Console.Write("Novo jogo?\n[1] - Sim \n[2] - Não: ");
-                continuar = int.Parse(Console.ReadLine());
+                do
+                {
+                    Console.Write("Novo jogo?\n[1] - Sim \n[2] - Não: ");
+                    continuar = int.Parse(Console.ReadLine());
+                } while (continuar < 1 || continuar > 2); 
                 Console.Clear();
             } while (continuar == 1);
             Console.WriteLine("Fim de jogo!");
