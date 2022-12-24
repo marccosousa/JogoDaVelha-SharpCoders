@@ -105,17 +105,33 @@
                 }
             }
 
-            // Se o jogo terminar em alguma diagonal: Diagonal principal, diagonal secundária
+            // Se o jogo terminar em alguma diagonal: Diagonal principal
             if (mat[0, 0] == mat[1, 1] && mat[1, 1] == mat[2, 2])
             {
                 terminou = true;
             }
-
+            // diagonal secundária
             if (mat[0, 2] == mat[1, 1] && mat[1, 1] == mat[2,0])
             {
                 terminou = true;
             }
 
+            int contVelha = 0;
+            for (int L = 0; L < 3; L++)
+            {
+                for (int C = 0; C < 3; C++)
+                {
+                    if (mat[L, C] != "X" && mat[L, C] != "O")
+                    {
+                        contVelha++; 
+                    }
+                }
+            }
+
+            if (contVelha == 0)
+            {
+                terminou = true; 
+            }
 
             return terminou;
         }
