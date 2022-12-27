@@ -2,20 +2,24 @@
 {
     class Partida
     {
-        public string jogadorX { get; set; }
-        public string jogadorO { get; set; }
-        public int numPartida { get; set; }
+        public string JogadorX { get; set; }
+        public string JogadorO { get; set; }
+        public int NumPartida { get; set; }
+
+        public Partida()
+        {
+        }
 
         public Partida(string jogadorX, string jogadorO, int numPartida)
         {
-            this.jogadorX = jogadorX;
-            this.jogadorO = jogadorO;
-            this.numPartida = numPartida;
+            this.JogadorX = jogadorX;
+            this.JogadorO = jogadorO;
+            this.NumPartida = numPartida;
         }
 
         public override string ToString()
         {
-            return $"jog1{jogadorX}, jog2{jogadorO}, numpartida:{numPartida}"; 
+            return $"jog1{JogadorX}, jog2{JogadorO}, numpartida:{NumPartida}"; 
         }
     }
 }

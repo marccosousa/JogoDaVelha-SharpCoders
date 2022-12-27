@@ -10,12 +10,14 @@
             int continuar = 1;
             bool respostaJogar;
             List<Partida> partidasList = new List<Partida>();
-            Console.Write("jogador x: ");
+            Console.Write("jogador 1: ");
             string nomeX = Console.ReadLine();
-            Console.Write("jogador o: ");
+            Console.Write("jogador 2: ");
             string nomeO = Console.ReadLine();
             int partida = 1;
-            partidasList.Add(new Partida(nomeX, nomeO, partida)); 
+            Partida p = new Partida(nomeX, nomeO, partida);
+            partidasList.Add(p);
+            Console.Clear();
 
             do
             {
@@ -28,6 +30,9 @@
                         cont++;
                     }
                 }
+                
+                Console.WriteLine("Jogador 1: " + p.JogadorX + " - X");
+                Console.WriteLine("Jogador 2: " + p.JogadorO + " - O");
                 MostrarVelha();
                 do
                 {
@@ -58,7 +63,7 @@
             } while (continuar == 1);
             Console.WriteLine("Fim de jogo!");
 
-            foreach(Partida p in partidasList)
+            foreach(Partida x in partidasList)
             {
                 Console.WriteLine(p.ToString());
             }
