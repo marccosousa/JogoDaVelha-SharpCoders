@@ -1,6 +1,4 @@
-﻿using System.Xml;
-
-namespace JogoDaVelha
+﻿namespace JogoDaVelha
 {
     class Program
     {
@@ -9,8 +7,16 @@ namespace JogoDaVelha
 
         static void Main(string[] args)
         {
-             int continuar = 1;
-             bool respostaJogar;
+            int continuar = 1;
+            bool respostaJogar;
+            List<Partida> partidasList = new List<Partida>();
+            Console.Write("jogador x: ");
+            string nomeX = Console.ReadLine();
+            Console.Write("jogador o: ");
+            string nomeO = Console.ReadLine();
+            int partida = 1;
+            partidasList.Add(new Partida(nomeX, nomeO, partida)); 
+
             do
             {
                 int cont = 1;
@@ -45,10 +51,17 @@ namespace JogoDaVelha
                 {
                     Console.Write("Novo jogo?\n[1] - Sim \n[2] - Não: ");
                     continuar = int.Parse(Console.ReadLine());
-                } while (continuar < 1 || continuar > 2); 
+                } while (continuar < 1 || continuar > 2);
+                partida++;
+                partidasList.Add(new Partida(nomeX, nomeO, partida));
                 Console.Clear();
             } while (continuar == 1);
             Console.WriteLine("Fim de jogo!");
+
+            foreach(Partida p in partidasList)
+            {
+                Console.WriteLine(p.ToString());
+            }
             
         }
 
