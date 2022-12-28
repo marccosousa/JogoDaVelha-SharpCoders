@@ -132,11 +132,13 @@
                 {
                     if (mat[L, 0] == "X")
                     {
-                        atual.VitoriaJogadorX(); 
+                        atual.VitoriaJogadorX();
+                        Console.WriteLine("Vitória do jogador 1: " + atual.JogadorX);
                     }
                     else
                     {
                         atual.VitoriaJogadorO();
+                        Console.WriteLine("Vitória do jogador 2: " + atual.JogadorO);
                     }
                     terminou = true;
                 }
@@ -149,10 +151,12 @@
                     if (mat[0, C] == "X")
                     {
                         atual.VitoriaJogadorX();
+                        Console.WriteLine("Vitória do jogador 1: " + atual.JogadorX);
                     }
                     else
                     {
                         atual.VitoriaJogadorO();
+                        Console.WriteLine("Vitória do jogador 2: " + atual.JogadorO);
                     }
                     terminou = true;
                 }
@@ -164,10 +168,12 @@
                 if (mat[0, 0] == "X")
                 {
                     atual.VitoriaJogadorX();
+                    Console.WriteLine("Vitória do jogador 1: " + atual.JogadorX);
                 }
                 else
                 {
                     atual.VitoriaJogadorO();
+                    Console.WriteLine("Vitória do jogador 2: " + atual.JogadorO);
                 }
                 terminou = true;
             }
@@ -177,10 +183,12 @@
                 if (mat[0, 2] == "X")
                 {
                     atual.VitoriaJogadorX();
+                    Console.WriteLine("Vitória do jogador 1: " + atual.JogadorX);
                 }
                 else
                 {
                     atual.VitoriaJogadorO();
+                    Console.WriteLine("Vitória do jogador 2: " + atual.JogadorO);
                 }
                 terminou = true;
             }
@@ -199,7 +207,8 @@
 
             if (contVelha == 0)
             {
-                atual.Velha();  
+                atual.Velha();
+                Console.WriteLine("Deu velha! :(");
                 terminou = true; 
             }
 
