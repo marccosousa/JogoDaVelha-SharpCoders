@@ -9,14 +9,14 @@
         {
             int continuar = 1;
             bool respostaJogar;
-            List<Partida> partidasList = new List<Partida>();
+            
             Console.Write("jogador 1: ");
             string nomeX = Console.ReadLine();
             Console.Write("jogador 2: ");
             string nomeO = Console.ReadLine();
-            Partida p = new Partida(nomeX, nomeO);
+            string vitoriaDaRodada = null; 
+            Partida p = new Partida(); 
             Console.Clear();
-
             do
             {
                 int cont = 1;
@@ -51,8 +51,8 @@
                     Console.WriteLine("Jogador 2: " + nomeO + " - O");
                     MostrarVelha();
 
-                } while (FimDeJogo(p) != true);
-                partidasList.Add(p);
+                } while (FimDeJogo(p, nomeX, nomeO, vitoriaDaRodada) != true);
+        
                 do
                 {
                     Console.Write("Novo jogo?\n[1] - Sim \n[2] - Não: ");
@@ -66,7 +66,7 @@
             Console.WriteLine("Velhas: " + p.PlacarVelha);
 
             int i = 1;
-            foreach (Partida x in partidasList)
+            foreach (Partida x in p.partidasList)
             {
                 Console.WriteLine(x);
                 i++;
@@ -120,7 +120,7 @@
 
         }
 
-        static bool FimDeJogo(Partida atual)
+        static bool FimDeJogo(Partida atual, string nomeX, string nomeO, string vitoriaDaRodada)
         {
             bool terminou = false;
             // Se o jogo terminar em alguma linha: 
@@ -131,13 +131,16 @@
                     if (mat[L, 0] == "X")
                     {
                         atual.VitoriaJogadorX();
-                        Console.WriteLine("Vitória do jogador 1: " + atual.JogadorX);                        
+                        Console.WriteLine("Vitória do jogador 1: " + nomeX);
+                        vitoriaDaRodada = "X"; 
                     }
                     else
                     {
                         atual.VitoriaJogadorO();
-                        Console.WriteLine("Vitória do jogador 2: " + atual.JogadorO);                        
+                        Console.WriteLine("Vitória do jogador 2: " + nomeO);
+                        vitoriaDaRodada = "O";                       
                     }
+                    atual.partidasList.Add(new Partida(nomeX, nomeO, vitoriaDaRodada));
                     terminou = true;
                 }
             }
@@ -149,13 +152,16 @@
                     if (mat[0, C] == "X")
                     {
                         atual.VitoriaJogadorX();
-                        Console.WriteLine("Vitória do jogador 1: " + atual.JogadorX);
+                        Console.WriteLine("Vitória do jogador 1: " + nomeX);
+                        vitoriaDaRodada = "X";
                     }
                     else
                     {
                         atual.VitoriaJogadorO();
-                        Console.WriteLine("Vitória do jogador 2: " + atual.JogadorO);
+                        Console.WriteLine("Vitória do jogador 2: " + nomeO);
+                        vitoriaDaRodada = "O";
                     }
+                    atual.partidasList.Add(new Partida(nomeX, nomeO, vitoriaDaRodada));
                     terminou = true;
                 }
             }
@@ -166,13 +172,16 @@
                 if (mat[0, 0] == "X")
                 {
                     atual.VitoriaJogadorX();
-                    Console.WriteLine("Vitória do jogador 1: " + atual.JogadorX);
+                    Console.WriteLine("Vitória do jogador 1: " + nomeX);
+                    vitoriaDaRodada = "X";
                 }
                 else
                 {
                     atual.VitoriaJogadorO();
-                    Console.WriteLine("Vitória do jogador 2: " + atual.JogadorO);
+                    Console.WriteLine("Vitória do jogador 2: " + nomeO);
+                    vitoriaDaRodada = "O";
                 }
+                atual.partidasList.Add(new Partida(nomeX, nomeO, vitoriaDaRodada));
                 terminou = true;
             }
             // diagonal secundária
@@ -181,13 +190,16 @@
                 if (mat[0, 2] == "X")
                 {
                     atual.VitoriaJogadorX();
-                    Console.WriteLine("Vitória do jogador 1: " + atual.JogadorX);
+                    Console.WriteLine("Vitória do jogador 1: " + nomeX);
+                    vitoriaDaRodada = "X";
                 }
                 else
                 {
                     atual.VitoriaJogadorO();
-                    Console.WriteLine("Vitória do jogador 2: " + atual.JogadorO);
+                    Console.WriteLine("Vitória do jogador 2: " + nomeO);
+                    vitoriaDaRodada = "O";
                 }
+                atual.partidasList.Add(new Partida(nomeX, nomeO, vitoriaDaRodada));
                 terminou = true;
             }
 
@@ -207,9 +219,10 @@
             {
                 atual.Velha();
                 Console.WriteLine("Deu velha! :(");
+                vitoriaDaRodada = "Velha"; 
+                atual.partidasList.Add(new Partida(nomeX, nomeO, vitoriaDaRodada));
                 terminou = true;
             }
-
             return terminou;
         }
 

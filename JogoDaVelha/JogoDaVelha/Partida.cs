@@ -7,6 +7,8 @@
         public string JogadorO { get; set; }
         public int PlacarO { get; private set; }
         public int PlacarVelha { get; private set; }
+        
+        public List<Partida> partidasList = new List<Partida>();
 
         public string VitoriaDaRodada { get; set; }
 
@@ -14,10 +16,11 @@
         {
         }
 
-        public Partida(string jogadorX, string jogadorO)
+        public Partida(string jogadorX, string jogadorO, string vitoriaDaRodada)
         {
             JogadorX = jogadorX;
             JogadorO = jogadorO;
+            VitoriaDaRodada = vitoriaDaRodada;
         }
 
         public void VitoriaJogadorX()
@@ -37,7 +40,7 @@
 
         public override string ToString()
         {
-            return $"Vitória da rodada: "; 
+            return $"Vitória da rodada: {VitoriaDaRodada} "; 
         }
     }
 }
