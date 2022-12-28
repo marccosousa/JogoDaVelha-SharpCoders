@@ -8,6 +8,8 @@
         public int PlacarO { get; private set; }
         public int PlacarVelha { get; private set; }
 
+        public string VitoriaDaRodada { get; set; }
+
         public Partida()
         {
         }
@@ -35,7 +37,7 @@
 
         public override string ToString()
         {
-            return $"jog1{JogadorX}, jog2{JogadorO}"; 
+            return $"Vitória da rodada: "; 
         }
     }
 }

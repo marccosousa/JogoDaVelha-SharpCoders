@@ -15,7 +15,6 @@
             Console.Write("jogador 2: ");
             string nomeO = Console.ReadLine();
             Partida p = new Partida(nomeX, nomeO);
-            partidasList.Add(p);
             Console.Clear();
 
             do
@@ -29,9 +28,9 @@
                         cont++;
                     }
                 }
-                
-                Console.WriteLine("Jogador 1: " + p.JogadorX + " - X");
-                Console.WriteLine("Jogador 2: " + p.JogadorO + " - O");
+
+                Console.WriteLine("Jogador 1: " + nomeX + " - X");
+                Console.WriteLine("Jogador 2: " + nomeO + " - O");
                 MostrarVelha();
                 do
                 {
@@ -48,17 +47,17 @@
                     } while (respostaJogar != true);
                     MudarJogador();
                     Console.Clear();
-                    Console.WriteLine("Jogador 1: " + p.JogadorX + " - X");
-                    Console.WriteLine("Jogador 2: " + p.JogadorO + " - O");
+                    Console.WriteLine("Jogador 1: " + nomeX + " - X");
+                    Console.WriteLine("Jogador 2: " + nomeO + " - O");
                     MostrarVelha();
 
                 } while (FimDeJogo(p) != true);
+                partidasList.Add(p);
                 do
                 {
                     Console.Write("Novo jogo?\n[1] - Sim \n[2] - Não: ");
                     continuar = int.Parse(Console.ReadLine());
                 } while (continuar < 1 || continuar > 2);
-                partidasList.Add(p);
                 Console.Clear();
             } while (continuar == 1);
             Console.WriteLine("Fim de jogo!");
@@ -66,14 +65,13 @@
             Console.WriteLine("vitorias jogador 2: " + p.PlacarO);
             Console.WriteLine("Velhas: " + p.PlacarVelha);
 
-
+            int i = 1;
             foreach (Partida x in partidasList)
             {
-                int i = 1; 
-                Console.WriteLine("Partida " + i + ": " + p.ToString());
+                Console.WriteLine(x);
                 i++;
             }
-            
+
         }
 
         // Funções do jogo.
@@ -91,7 +89,7 @@
                 Console.WriteLine("+---+---+---+");
             }
         }
-        
+
         static bool Jogar(string simbolo, string posicao)
         {
             bool mudouDeNumParaSimbolo = false;
@@ -102,13 +100,13 @@
                     if (mat[L, C] == posicao)
                     {
                         mat[L, C] = simbolo;
-                        mudouDeNumParaSimbolo = true; 
+                        mudouDeNumParaSimbolo = true;
                     }
                 }
             }
             return mudouDeNumParaSimbolo;
         }
-        
+
         static void MudarJogador()
         {
             if (simbolo == "X")
@@ -133,12 +131,12 @@
                     if (mat[L, 0] == "X")
                     {
                         atual.VitoriaJogadorX();
-                        Console.WriteLine("Vitória do jogador 1: " + atual.JogadorX);
+                        Console.WriteLine("Vitória do jogador 1: " + atual.JogadorX);                        
                     }
                     else
                     {
                         atual.VitoriaJogadorO();
-                        Console.WriteLine("Vitória do jogador 2: " + atual.JogadorO);
+                        Console.WriteLine("Vitória do jogador 2: " + atual.JogadorO);                        
                     }
                     terminou = true;
                 }
@@ -178,7 +176,7 @@
                 terminou = true;
             }
             // diagonal secundária
-            if (mat[0, 2] == mat[1, 1] && mat[1, 1] == mat[2,0])
+            if (mat[0, 2] == mat[1, 1] && mat[1, 1] == mat[2, 0])
             {
                 if (mat[0, 2] == "X")
                 {
@@ -200,7 +198,7 @@
                 {
                     if (mat[L, C] != "X" && mat[L, C] != "O")
                     {
-                        contVelha++; 
+                        contVelha++;
                     }
                 }
             }
@@ -209,10 +207,12 @@
             {
                 atual.Velha();
                 Console.WriteLine("Deu velha! :(");
-                terminou = true; 
+                terminou = true;
             }
 
-            return terminou; 
+            return terminou;
         }
+
+
     }
 }
