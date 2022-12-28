@@ -40,7 +40,18 @@
 
         public override string ToString()
         {
-            return VitoriaDaRodada; 
+            if (VitoriaDaRodada == "X")
+            {
+                return $"Vitória do jogador 1: {JogadorX} - X"; 
+            } 
+            else if (VitoriaDaRodada == "O")
+            {
+                return $"Vitória do jogador 2: {JogadorO} - O";
+            } 
+            else
+            {
+                return $"Ninguém venceu! Deu velha :)";
+            }
         }
     }
 }

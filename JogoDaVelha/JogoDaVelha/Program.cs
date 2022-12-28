@@ -60,16 +60,18 @@
                 } while (continuar < 1 || continuar > 2);
                 Console.Clear();
             } while (continuar == 1);
+            
             Console.WriteLine("---------- Fim de jogo! ----------");
-            Console.WriteLine("Vitórias do jogador 1: " + p.PlacarX);
-            Console.WriteLine("Vitórias do jogador 2: " + p.PlacarO);
-            Console.WriteLine("Velhas ##: " + p.PlacarVelha);
+            Console.WriteLine($"Vitórias do jogador 1 - {nomeX}: {p.PlacarX}");
+            Console.WriteLine($"Vitórias do jogador 2 - {nomeO}: {p.PlacarO}");
+            Console.WriteLine($"Velhas ##: {p.PlacarVelha}");
+            
             Console.WriteLine();
             Console.WriteLine("---------- Histórico de partidas ----------");
             int i = 1;
             foreach (Partida x in p.partidasList)
             {
-                Console.WriteLine($"Vitória da rodada {i}: {x.VitoriaDaRodada}");
+                Console.WriteLine(x);
                 i++;
             }
 
