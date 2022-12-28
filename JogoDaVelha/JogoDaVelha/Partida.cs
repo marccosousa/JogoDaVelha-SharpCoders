@@ -40,7 +40,7 @@
 
         public override string ToString()
         {
-            return $"Vitória da rodada: {VitoriaDaRodada} "; 
+            return VitoriaDaRodada; 
         }
     }
 }

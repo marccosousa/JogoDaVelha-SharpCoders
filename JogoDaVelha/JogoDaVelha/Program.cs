@@ -10,9 +10,9 @@
             int continuar = 1;
             bool respostaJogar;
             
-            Console.Write("jogador 1: ");
+            Console.Write("Nome do jogador 1 (Será o X): ");
             string nomeX = Console.ReadLine();
-            Console.Write("jogador 2: ");
+            Console.Write("Nome do jogador 2 (Será o O): ");
             string nomeO = Console.ReadLine();
             string vitoriaDaRodada = null; 
             Partida p = new Partida(); 
@@ -60,15 +60,16 @@
                 } while (continuar < 1 || continuar > 2);
                 Console.Clear();
             } while (continuar == 1);
-            Console.WriteLine("Fim de jogo!");
-            Console.WriteLine("vitorias jogador 1: " + p.PlacarX);
-            Console.WriteLine("vitorias jogador 2: " + p.PlacarO);
-            Console.WriteLine("Velhas: " + p.PlacarVelha);
-
+            Console.WriteLine("---------- Fim de jogo! ----------");
+            Console.WriteLine("Vitórias do jogador 1: " + p.PlacarX);
+            Console.WriteLine("Vitórias do jogador 2: " + p.PlacarO);
+            Console.WriteLine("Velhas ##: " + p.PlacarVelha);
+            Console.WriteLine();
+            Console.WriteLine("---------- Histórico de partidas ----------");
             int i = 1;
             foreach (Partida x in p.partidasList)
             {
-                Console.WriteLine(x);
+                Console.WriteLine($"Vitória da rodada {i}: {x.VitoriaDaRodada}");
                 i++;
             }
 
