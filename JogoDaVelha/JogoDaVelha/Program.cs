@@ -1,4 +1,6 @@
-﻿namespace JogoDaVelha
+﻿using System.Runtime.ConstrainedExecution;
+
+namespace JogoDaVelha
 {
     class Program
     {
@@ -9,13 +11,13 @@
         {
             int continuar = 1;
             bool respostaJogar;
-            
+
             Console.Write("Nome do jogador 1 (Será o X): ");
             string nomeX = Console.ReadLine();
             Console.Write("Nome do jogador 2 (Será o O): ");
             string nomeO = Console.ReadLine();
-            string vitoriaDaRodada = null; 
-            Partida p = new Partida(); 
+            string vitoriaDaRodada = null;
+            Partida p = new Partida();
             Console.Clear();
             do
             {
@@ -31,11 +33,13 @@
 
                 Console.WriteLine("Jogador 1: " + nomeX + " - X");
                 Console.WriteLine("Jogador 2: " + nomeO + " - O");
+                Console.WriteLine();
                 MostrarVelha();
                 do
                 {
                     do
                     {
+                        Console.WriteLine();
                         Console.Write($"Vai jogar {simbolo} em qual posição? ");
                         posicao = Console.ReadLine();
                         respostaJogar = Jogar(simbolo, posicao);
@@ -49,31 +53,46 @@
                     Console.Clear();
                     Console.WriteLine("Jogador 1: " + nomeX + " - X");
                     Console.WriteLine("Jogador 2: " + nomeO + " - O");
+                    Console.WriteLine();
                     MostrarVelha();
 
                 } while (FimDeJogo(p, nomeX, nomeO, vitoriaDaRodada) != true);
-        
+                Console.WriteLine();
                 do
                 {
-                    Console.Write("Novo jogo?\n[1] - Sim \n[2] - Não: ");
+                    Console.Write("Novo jogo? [1] - Sim  [2] - Não: ");
                     continuar = int.Parse(Console.ReadLine());
                 } while (continuar < 1 || continuar > 2);
                 Console.Clear();
             } while (continuar == 1);
             
+            Console.WriteLine(); // Margem
             Console.WriteLine("---------- Fim de jogo! ----------");
             Console.WriteLine($"Vitórias do jogador 1 - {nomeX}: {p.PlacarX}");
             Console.WriteLine($"Vitórias do jogador 2 - {nomeO}: {p.PlacarO}");
             Console.WriteLine($"Velhas ##: {p.PlacarVelha}");
+
+            int historico;
+            do
+            {
+                Console.WriteLine();
+                Console.Write("Você quer ver o histórico de partidas? [1] - Sim [2] - Não: ");
+                historico = int.Parse(Console.ReadLine());
+            } while (historico < 1 || historico > 2);
+
+            Console.WriteLine();
+            if (historico == 1)
+            {
+                int i = 1;
+                foreach (Partida x in p.partidasList)
+                {
+                    Console.WriteLine($"Partida {i}: {x}");
+                    i++;
+                }
+            }
             
             Console.WriteLine();
-            Console.WriteLine("---------- Histórico de partidas ----------");
-            int i = 1;
-            foreach (Partida x in p.partidasList)
-            {
-                Console.WriteLine(x);
-                i++;
-            }
+            Console.WriteLine("---------- FIM ----------");
 
         }
 
@@ -126,6 +145,7 @@
         static bool FimDeJogo(Partida atual, string nomeX, string nomeO, string vitoriaDaRodada)
         {
             bool terminou = false;
+
             // Se o jogo terminar em alguma linha: 
             for (int L = 0; L < 3; L++)
             {
@@ -135,13 +155,13 @@
                     {
                         atual.VitoriaJogadorX();
                         Console.WriteLine("Vitória do jogador 1: " + nomeX);
-                        vitoriaDaRodada = "X"; 
+                        vitoriaDaRodada = "X";
                     }
                     else
                     {
                         atual.VitoriaJogadorO();
                         Console.WriteLine("Vitória do jogador 2: " + nomeO);
-                        vitoriaDaRodada = "O";                       
+                        vitoriaDaRodada = "O";
                     }
                     atual.partidasList.Add(new Partida(nomeX, nomeO, vitoriaDaRodada));
                     terminou = true;
@@ -205,8 +225,8 @@
                 atual.partidasList.Add(new Partida(nomeX, nomeO, vitoriaDaRodada));
                 terminou = true;
             }
-
-            int contVelha = 0;
+            // Quando o jogo termina na última rodada, ele contabiliza a vitória e a velha. Quando termina em velha, é velha mesmo.
+            int contVelha = 0; 
             for (int L = 0; L < 3; L++)
             {
                 for (int C = 0; C < 3; C++)
@@ -222,7 +242,7 @@
             {
                 atual.Velha();
                 Console.WriteLine("Deu velha! :(");
-                vitoriaDaRodada = "Velha"; 
+                vitoriaDaRodada = "Velha";
                 atual.partidasList.Add(new Partida(nomeX, nomeO, vitoriaDaRodada));
                 terminou = true;
             }
