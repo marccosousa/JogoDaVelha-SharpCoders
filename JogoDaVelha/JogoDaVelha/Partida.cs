@@ -3,23 +3,39 @@
     class Partida
     {
         public string JogadorX { get; set; }
+        public int PlacarX{ get; private set; }
         public string JogadorO { get; set; }
-        public int NumPartida { get; set; }
+        public int PlacarO { get; private set; }
+        public int PlacarVelha { get; private set; }
 
         public Partida()
         {
         }
 
-        public Partida(string jogadorX, string jogadorO, int numPartida)
+        public Partida(string jogadorX, string jogadorO)
         {
-            this.JogadorX = jogadorX;
-            this.JogadorO = jogadorO;
-            this.NumPartida = numPartida;
+            JogadorX = jogadorX;
+            JogadorO = jogadorO;
+        }
+
+        public void VitoriaJogadorX()
+        {
+            PlacarX += 1; 
+        }
+
+        public void VitoriaJogadorO()
+        {
+            PlacarO += 1;
+        }
+
+        public void Velha()
+        {
+            PlacarVelha += 1;
         }
 
         public override string ToString()
         {
-            return $"jog1{JogadorX}, jog2{JogadorO}, numpartida:{NumPartida}"; 
+            return $"jog1{JogadorX}, jog2{JogadorO}"; 
         }
     }
 }

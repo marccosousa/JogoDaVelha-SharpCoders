@@ -14,8 +14,7 @@
             string nomeX = Console.ReadLine();
             Console.Write("jogador 2: ");
             string nomeO = Console.ReadLine();
-            int partida = 1;
-            Partida p = new Partida(nomeX, nomeO, partida);
+            Partida p = new Partida(nomeX, nomeO);
             partidasList.Add(p);
             Console.Clear();
 
@@ -49,23 +48,30 @@
                     } while (respostaJogar != true);
                     MudarJogador();
                     Console.Clear();
+                    Console.WriteLine("Jogador 1: " + p.JogadorX + " - X");
+                    Console.WriteLine("Jogador 2: " + p.JogadorO + " - O");
                     MostrarVelha();
 
-                } while (FimDeJogo() != true);
+                } while (FimDeJogo(p) != true);
                 do
                 {
                     Console.Write("Novo jogo?\n[1] - Sim \n[2] - Não: ");
                     continuar = int.Parse(Console.ReadLine());
                 } while (continuar < 1 || continuar > 2);
-                partida++;
-                partidasList.Add(new Partida(nomeX, nomeO, partida));
+                partidasList.Add(p);
                 Console.Clear();
             } while (continuar == 1);
             Console.WriteLine("Fim de jogo!");
+            Console.WriteLine("vitorias jogador 1: " + p.PlacarX);
+            Console.WriteLine("vitorias jogador 2: " + p.PlacarO);
+            Console.WriteLine("Velhas: " + p.PlacarVelha);
 
-            foreach(Partida x in partidasList)
+
+            foreach (Partida x in partidasList)
             {
-                Console.WriteLine(p.ToString());
+                int i = 1; 
+                Console.WriteLine("Partida " + i + ": " + p.ToString());
+                i++;
             }
             
         }
@@ -116,7 +122,7 @@
 
         }
 
-        static bool FimDeJogo()
+        static bool FimDeJogo(Partida atual)
         {
             bool terminou = false;
             // Se o jogo terminar em alguma linha: 
@@ -124,6 +130,14 @@
             {
                 if (mat[L, 0] == mat[L, 1] && mat[L, 1] == mat[L, 2])
                 {
+                    if (mat[L, 0] == "X")
+                    {
+                        atual.VitoriaJogadorX(); 
+                    }
+                    else
+                    {
+                        atual.VitoriaJogadorO();
+                    }
                     terminou = true;
                 }
             }
@@ -132,6 +146,14 @@
             {
                 if (mat[0, C] == mat[1, C] && mat[1, C] == mat[2, C])
                 {
+                    if (mat[0, C] == "X")
+                    {
+                        atual.VitoriaJogadorX();
+                    }
+                    else
+                    {
+                        atual.VitoriaJogadorO();
+                    }
                     terminou = true;
                 }
             }
@@ -139,11 +161,27 @@
             // Se o jogo terminar em alguma diagonal: Diagonal principal
             if (mat[0, 0] == mat[1, 1] && mat[1, 1] == mat[2, 2])
             {
+                if (mat[0, 0] == "X")
+                {
+                    atual.VitoriaJogadorX();
+                }
+                else
+                {
+                    atual.VitoriaJogadorO();
+                }
                 terminou = true;
             }
             // diagonal secundária
             if (mat[0, 2] == mat[1, 1] && mat[1, 1] == mat[2,0])
             {
+                if (mat[0, 2] == "X")
+                {
+                    atual.VitoriaJogadorX();
+                }
+                else
+                {
+                    atual.VitoriaJogadorO();
+                }
                 terminou = true;
             }
 
@@ -161,6 +199,7 @@
 
             if (contVelha == 0)
             {
+                atual.Velha();  
                 terminou = true; 
             }
 
