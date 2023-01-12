@@ -65,7 +65,7 @@ namespace JogoDaVelha
                 } while (continuar < 1 || continuar > 2);
                 Console.Clear();
             } while (continuar == 1);
-            
+
             Console.WriteLine(); // Margem
             Console.WriteLine("---------- Fim de jogo! ----------");
             Console.WriteLine($"Vitórias do jogador 1 - {nomeX}: {p.PlacarX}");
@@ -90,7 +90,7 @@ namespace JogoDaVelha
                     i++;
                 }
             }
-            
+
             Console.WriteLine();
             Console.WriteLine("---------- FIM ----------");
 
@@ -141,7 +141,6 @@ namespace JogoDaVelha
             }
 
         }
-
         static bool FimDeJogo(Partida atual, string nomeX, string nomeO, string vitoriaDaRodada)
         {
             bool terminou = false;
@@ -226,7 +225,7 @@ namespace JogoDaVelha
                 terminou = true;
             }
             // Quando o jogo termina na última rodada, ele contabiliza a vitória e a velha. Quando termina em velha, é velha mesmo.
-            int contVelha = 0; 
+            int contVelha = 0;
             for (int L = 0; L < 3; L++)
             {
                 for (int C = 0; C < 3; C++)
@@ -248,7 +247,6 @@ namespace JogoDaVelha
             }
             return terminou;
         }
-
 
     }
 }
